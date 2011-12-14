@@ -1,0 +1,323 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F521B3141493E101006F5075 /* HTTPLSTransmogrifier.m in Sources */ = {isa = PBXBuildFile; fileRef = F521B3131493E101006F5075 /* HTTPLSTransmogrifier.m */; };
+		F521B3171494281D006F5075 /* AACTranscoder.m in Sources */ = {isa = PBXBuildFile; fileRef = F521B3161494281D006F5075 /* AACTranscoder.m */; };
+		F5F956DD1490FE520087F250 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F956DC1490FE520087F250 /* Cocoa.framework */; };
+		F5F956E71490FE520087F250 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5F956E51490FE520087F250 /* InfoPlist.strings */; };
+		F5F956E91490FE520087F250 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F956E81490FE520087F250 /* main.m */; };
+		F5F956ED1490FE520087F250 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = F5F956EB1490FE520087F250 /* Credits.rtf */; };
+		F5F956F01490FE520087F250 /* ESAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F956EF1490FE520087F250 /* ESAppDelegate.m */; };
+		F5F956F31490FE520087F250 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5F956F11490FE520087F250 /* MainMenu.xib */; };
+		F5F957001490FEB70087F250 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F956FE1490FEB70087F250 /* MainViewController.m */; };
+		F5F957011490FEB70087F250 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5F956FF1490FEB70087F250 /* MainViewController.xib */; };
+		F5F9571A1491594B0087F250 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5F957191491594B0087F250 /* AudioToolbox.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		F521B3121493E101006F5075 /* HTTPLSTransmogrifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPLSTransmogrifier.h; sourceTree = "<group>"; };
+		F521B3131493E101006F5075 /* HTTPLSTransmogrifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPLSTransmogrifier.m; sourceTree = "<group>"; };
+		F521B3161494281D006F5075 /* AACTranscoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AACTranscoder.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		F5F956D81490FE520087F250 /* Transmogrifier.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transmogrifier.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5F956DC1490FE520087F250 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		F5F956DF1490FE520087F250 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		F5F956E01490FE520087F250 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		F5F956E11490FE520087F250 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F5F956E41490FE520087F250 /* Transmogrifier-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Transmogrifier-Info.plist"; sourceTree = "<group>"; };
+		F5F956E61490FE520087F250 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F5F956E81490FE520087F250 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F5F956EA1490FE520087F250 /* Transmogrifier-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Transmogrifier-Prefix.pch"; sourceTree = "<group>"; };
+		F5F956EC1490FE520087F250 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		F5F956EE1490FE520087F250 /* ESAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESAppDelegate.h; sourceTree = "<group>"; };
+		F5F956EF1490FE520087F250 /* ESAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ESAppDelegate.m; sourceTree = "<group>"; };
+		F5F956F21490FE520087F250 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		F5F956FD1490FEB70087F250 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		F5F956FE1490FEB70087F250 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		F5F956FF1490FEB70087F250 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		F5F95715149158800087F250 /* AACTranscoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AACTranscoder.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		F5F957191491594B0087F250 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F5F956D51490FE520087F250 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5F9571A1491594B0087F250 /* AudioToolbox.framework in Frameworks */,
+				F5F956DD1490FE520087F250 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F5F956CD1490FE520087F250 = {
+			isa = PBXGroup;
+			children = (
+				F5F956E21490FE520087F250 /* Transmogrifier */,
+				F5F956DB1490FE520087F250 /* Frameworks */,
+				F5F956D91490FE520087F250 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F5F956D91490FE520087F250 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F5F956D81490FE520087F250 /* Transmogrifier.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F5F956DB1490FE520087F250 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F5F957191491594B0087F250 /* AudioToolbox.framework */,
+				F5F956DC1490FE520087F250 /* Cocoa.framework */,
+				F5F956DE1490FE520087F250 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F5F956DE1490FE520087F250 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F5F956DF1490FE520087F250 /* AppKit.framework */,
+				F5F956E01490FE520087F250 /* CoreData.framework */,
+				F5F956E11490FE520087F250 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		F5F956E21490FE520087F250 /* Transmogrifier */ = {
+			isa = PBXGroup;
+			children = (
+				F5F956EE1490FE520087F250 /* ESAppDelegate.h */,
+				F5F956EF1490FE520087F250 /* ESAppDelegate.m */,
+				F5F956F11490FE520087F250 /* MainMenu.xib */,
+				F5F956FD1490FEB70087F250 /* MainViewController.h */,
+				F5F956FE1490FEB70087F250 /* MainViewController.m */,
+				F5F956FF1490FEB70087F250 /* MainViewController.xib */,
+				F521B3121493E101006F5075 /* HTTPLSTransmogrifier.h */,
+				F521B3131493E101006F5075 /* HTTPLSTransmogrifier.m */,
+				F5F95715149158800087F250 /* AACTranscoder.h */,
+				F521B3161494281D006F5075 /* AACTranscoder.m */,
+				F5F956E31490FE520087F250 /* Supporting Files */,
+			);
+			path = Transmogrifier;
+			sourceTree = "<group>";
+		};
+		F5F956E31490FE520087F250 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F5F956E41490FE520087F250 /* Transmogrifier-Info.plist */,
+				F5F956E51490FE520087F250 /* InfoPlist.strings */,
+				F5F956E81490FE520087F250 /* main.m */,
+				F5F956EA1490FE520087F250 /* Transmogrifier-Prefix.pch */,
+				F5F956EB1490FE520087F250 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F5F956D71490FE520087F250 /* Transmogrifier */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5F956F61490FE520087F250 /* Build configuration list for PBXNativeTarget "Transmogrifier" */;
+			buildPhases = (
+				F5F956D41490FE520087F250 /* Sources */,
+				F5F956D51490FE520087F250 /* Frameworks */,
+				F5F956D61490FE520087F250 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Transmogrifier;
+			productName = Transmogrifier;
+			productReference = F5F956D81490FE520087F250 /* Transmogrifier.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F5F956CF1490FE520087F250 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Doug Russell";
+			};
+			buildConfigurationList = F5F956D21490FE520087F250 /* Build configuration list for PBXProject "Transmogrifier" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F5F956CD1490FE520087F250;
+			productRefGroup = F5F956D91490FE520087F250 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F5F956D71490FE520087F250 /* Transmogrifier */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F5F956D61490FE520087F250 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5F956E71490FE520087F250 /* InfoPlist.strings in Resources */,
+				F5F956ED1490FE520087F250 /* Credits.rtf in Resources */,
+				F5F956F31490FE520087F250 /* MainMenu.xib in Resources */,
+				F5F957011490FEB70087F250 /* MainViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F5F956D41490FE520087F250 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5F956E91490FE520087F250 /* main.m in Sources */,
+				F5F956F01490FE520087F250 /* ESAppDelegate.m in Sources */,
+				F5F957001490FEB70087F250 /* MainViewController.m in Sources */,
+				F521B3141493E101006F5075 /* HTTPLSTransmogrifier.m in Sources */,
+				F521B3171494281D006F5075 /* AACTranscoder.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F5F956E51490FE520087F250 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5F956E61490FE520087F250 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F5F956EB1490FE520087F250 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5F956EC1490FE520087F250 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		F5F956F11490FE520087F250 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5F956F21490FE520087F250 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F5F956F41490FE520087F250 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F5F956F51490FE520087F250 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F5F956F71490FE520087F250 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Transmogrifier/Transmogrifier-Prefix.pch";
+				INFOPLIST_FILE = "Transmogrifier/Transmogrifier-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F5F956F81490FE520087F250 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Transmogrifier/Transmogrifier-Prefix.pch";
+				INFOPLIST_FILE = "Transmogrifier/Transmogrifier-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F5F956D21490FE520087F250 /* Build configuration list for PBXProject "Transmogrifier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5F956F41490FE520087F250 /* Debug */,
+				F5F956F51490FE520087F250 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5F956F61490FE520087F250 /* Build configuration list for PBXNativeTarget "Transmogrifier" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5F956F71490FE520087F250 /* Debug */,
+				F5F956F81490FE520087F250 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F5F956CF1490FE520087F250 /* Project object */;
+}
