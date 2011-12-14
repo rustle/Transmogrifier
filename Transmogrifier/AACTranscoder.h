@@ -26,11 +26,11 @@
 
 extern NSString *const AACAudioConverterErrorDomain;
 enum {
-    AACAudioConverterFileError,
-    AACAudioConverterFormatError,
+	AACAudioConverterFileError,
+	AACAudioConverterFormatError,
 	AACAudioConverterConverterError,
-    AACAudioConverterUnrecoverableInterruptionError,
-    AACAudioConverterInitialisationError
+	AACAudioConverterUnrecoverableInterruptionError,
+	AACAudioConverterInitialisationError
 };
 
 extern UInt32 const kBitRateLow;

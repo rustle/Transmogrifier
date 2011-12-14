@@ -173,18 +173,18 @@
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)sender
 {
-    NSPasteboard *pboard;
-    NSDragOperation sourceDragMask;
+	NSPasteboard *pboard;
+	NSDragOperation sourceDragMask;
 	
-    sourceDragMask = [sender draggingSourceOperationMask];
-    pboard = [sender draggingPasteboard];
+	sourceDragMask = [sender draggingSourceOperationMask];
+	pboard = [sender draggingPasteboard];
 	
 	if ([[pboard types] containsObject:NSFilenamesPboardType] &&
 		(sourceDragMask & NSDragOperationLink)) 
 	{
 		return NSDragOperationLink;
-    }
-    return NSDragOperationNone;
+	}
+	return NSDragOperationNone;
 }
 
 - (BOOL)prepareForDragOperation:(id < NSDraggingInfo >)sender
@@ -193,37 +193,37 @@
 		return NO;
 	
 	NSPasteboard *pboard;
-    NSDragOperation sourceDragMask;
+	NSDragOperation sourceDragMask;
 	
-    sourceDragMask = [sender draggingSourceOperationMask];
-    pboard = [sender draggingPasteboard];
+	sourceDragMask = [sender draggingSourceOperationMask];
+	pboard = [sender draggingPasteboard];
 	
-    if ([[pboard types] containsObject:NSFilenamesPboardType] &&
+	if ([[pboard types] containsObject:NSFilenamesPboardType] &&
 		(sourceDragMask & NSDragOperationLink)) 
 	{
 		return YES;
-    }
-    return NO;
+	}
+	return NO;
 }
 
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender
 {
 	NSPasteboard *pboard;
-    NSDragOperation sourceDragMask;
+	NSDragOperation sourceDragMask;
 	
-    sourceDragMask = [sender draggingSourceOperationMask];
-    pboard = [sender draggingPasteboard];
+	sourceDragMask = [sender draggingSourceOperationMask];
+	pboard = [sender draggingPasteboard];
 	
-    if ([[pboard types] containsObject:NSFilenamesPboardType]) 
+	if ([[pboard types] containsObject:NSFilenamesPboardType]) 
 	{
 		NSArray *files = [pboard propertyListForType:NSFilenamesPboardType];
-        if (sourceDragMask & NSDragOperationLink) 
+		if (sourceDragMask & NSDragOperationLink) 
 		{
 			[self.viewController addFiles:files];
-        }
+		}
 		return YES;
-    }
-    return NO;
+	}
+	return NO;
 }
 
 @end

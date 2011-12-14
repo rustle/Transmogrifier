@@ -12,12 +12,14 @@ NSString *const AACAudioConverterErrorDomain = @"com.atastypixel.TPAACAudioConve
 
 #define checkResult(result,operation) (_checkResultLite((result),(operation),__FILE__,__LINE__))
 
-static inline BOOL _checkResultLite(OSStatus result, const char *operation, const char* file, int line) {
-    if ( result != noErr ) {
-        NSLog(@"%s:%d: %s result %d %08X %4.4s\n", file, line, operation, (int)result, (int)result, (char*)&result); 
-        return NO;
-    }
-    return YES;
+static inline BOOL _checkResultLite(OSStatus result, const char *operation, const char* file, int line) 
+{
+	if ( result != noErr )
+	{
+		NSLog(@"%s:%d: %s result %d %08X %4.4s\n", file, line, operation, (int)result, (int)result, (char*)&result); 
+		return NO;
+	}
+	return YES;
 }
 
 static BOOL _available;
@@ -38,43 +40,43 @@ static BOOL _available_set = NO;
 
 + (BOOL)AACConverterAvailable 
 {
-    if (_available_set)
+	if (_available_set)
 	{
 		return _available;
 	}
-    
-    // get an array of AudioClassDescriptions for all installed encoders for the given format 
-    // the specifier is the format that we are interested in - this is 'aac ' in our case
-    UInt32 encoderSpecifier = kAudioFormatMPEG4AAC;
-    UInt32 size;
-    
-    if ( !checkResult(AudioFormatGetPropertyInfo(kAudioFormatProperty_Encoders, sizeof(encoderSpecifier), &encoderSpecifier, &size),
-                      "AudioFormatGetPropertyInfo(kAudioFormatProperty_Encoders") ) return NO;
-    
-    UInt32 numEncoders = size / sizeof(AudioClassDescription);
-    AudioClassDescription encoderDescriptions[numEncoders];
-    
-    if (!checkResult(AudioFormatGetProperty(kAudioFormatProperty_Encoders, sizeof(encoderSpecifier), &encoderSpecifier, &size, encoderDescriptions),
-					 "AudioFormatGetProperty(kAudioFormatProperty_Encoders")) 
+	
+	// get an array of AudioClassDescriptions for all installed encoders for the given format 
+	// the specifier is the format that we are interested in - this is 'aac ' in our case
+	UInt32 encoderSpecifier = kAudioFormatMPEG4AAC;
+	UInt32 size;
+	
+	if (!checkResult(AudioFormatGetPropertyInfo(kAudioFormatProperty_Encoders, sizeof(encoderSpecifier), &encoderSpecifier, &size),
+		"AudioFormatGetPropertyInfo(kAudioFormatProperty_Encoders")) return NO;
+	
+	UInt32 numEncoders = size / sizeof(AudioClassDescription);
+	AudioClassDescription encoderDescriptions[numEncoders];
+	
+	if (!checkResult(AudioFormatGetProperty(kAudioFormatProperty_Encoders, sizeof(encoderSpecifier), &encoderSpecifier, &size, encoderDescriptions),
+	"AudioFormatGetProperty(kAudioFormatProperty_Encoders")) 
 	{
-        _available_set = YES;
-        _available = NO;
-        return NO;
-    }
-    
-    for (UInt32 i=0; i < numEncoders; ++i) 
+	_available_set = YES;
+	_available = NO;
+	return NO;
+	}
+	
+	for (UInt32 i=0; i < numEncoders; ++i) 
 	{
-        if (encoderDescriptions[i].mSubType == kAudioFormatMPEG4AAC_HE)
+		if (encoderDescriptions[i].mSubType == kAudioFormatMPEG4AAC_HE)
 		{
-            _available_set = YES;
-            _available = YES;
-            return YES;
-        }
-    }
-    
-    _available_set = YES;
-    _available = NO;
-    return NO;
+			_available_set = YES;
+			_available = YES;
+			return YES;
+		}
+	}
+	
+	_available_set = YES;
+	_available = NO;
+	return NO;
 }
 
 - (id)initWithInputFile:(NSString *)inputFilePath outputFile:(NSString *)outputFilePath
@@ -92,74 +94,74 @@ static BOOL _available_set = NO;
 - (BOOL)start
 {
 	ExtAudioFileRef sourceFile = NULL;
-    AudioStreamBasicDescription sourceFormat;
-    if (self.inputFilePath) 
+	AudioStreamBasicDescription sourceFormat;
+	if (self.inputFilePath) 
 	{
-        if (!checkResult(ExtAudioFileOpenURL((__bridge CFURLRef)[NSURL fileURLWithPath:self.inputFilePath], &sourceFile), 
+		if (!checkResult(ExtAudioFileOpenURL((__bridge CFURLRef)[NSURL fileURLWithPath:self.inputFilePath], &sourceFile), 
 						 "ExtAudioFileOpenURL"))
 		{
 			self.error = [NSError errorWithDomain:AACAudioConverterErrorDomain
 											 code:AACAudioConverterFileError
 										 userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Couldn't open the source file", @"") forKey:NSLocalizedDescriptionKey]];
-            return NO;
-        }
-        
-        UInt32 size = sizeof(sourceFormat);
-        if (!checkResult(ExtAudioFileGetProperty(sourceFile, kExtAudioFileProperty_FileDataFormat, &size, &sourceFormat), 
+			return NO;
+		}
+		
+		UInt32 size = sizeof(sourceFormat);
+		if (!checkResult(ExtAudioFileGetProperty(sourceFile, kExtAudioFileProperty_FileDataFormat, &size, &sourceFormat), 
 						 "ExtAudioFileGetProperty(kExtAudioFileProperty_FileDataFormat)"))
 		{
 			self.error = [NSError errorWithDomain:AACAudioConverterErrorDomain
 											 code:AACAudioConverterFormatError
 										 userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Couldn't read the source file", @"") forKey:NSLocalizedDescriptionKey]];
-            return NO;
-        }
-    }
+			return NO;
+		}
+	}
 	else
 	{
 		//error
 	}
-    
-    AudioStreamBasicDescription destinationFormat;
-    memset(&destinationFormat, 0, sizeof(destinationFormat));
-    destinationFormat.mChannelsPerFrame = sourceFormat.mChannelsPerFrame;
-    destinationFormat.mFormatID = kAudioFormatMPEG4AAC;
+	
+	AudioStreamBasicDescription destinationFormat;
+	memset(&destinationFormat, 0, sizeof(destinationFormat));
+	destinationFormat.mChannelsPerFrame = sourceFormat.mChannelsPerFrame;
+	destinationFormat.mFormatID = kAudioFormatMPEG4AAC;
 	destinationFormat.mSampleRate = 48000;
-    UInt32 size = sizeof(destinationFormat);
-    if (!checkResult(AudioFormatGetProperty(kAudioFormatProperty_FormatInfo, 0, NULL, &size, &destinationFormat), 
+	UInt32 size = sizeof(destinationFormat);
+	if (!checkResult(AudioFormatGetProperty(kAudioFormatProperty_FormatInfo, 0, NULL, &size, &destinationFormat), 
 					 "AudioFormatGetProperty(kAudioFormatProperty_FormatInfo)"))
 	{
-        self.error = [NSError errorWithDomain:AACAudioConverterErrorDomain
+		self.error = [NSError errorWithDomain:AACAudioConverterErrorDomain
 										 code:AACAudioConverterFormatError
 									 userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Couldn't setup destination format", @"") forKey:NSLocalizedDescriptionKey]];
-        return NO;
-    }
-    
-    ExtAudioFileRef destinationFile;
-    if (!checkResult(ExtAudioFileCreateWithURL((__bridge CFURLRef)[NSURL fileURLWithPath:self.outputFilePath], kAudioFileM4AType, &destinationFormat, NULL, kAudioFileFlags_EraseFile, &destinationFile), "ExtAudioFileCreateWithURL")) 
+		return NO;
+	}
+	
+	ExtAudioFileRef destinationFile;
+	if (!checkResult(ExtAudioFileCreateWithURL((__bridge CFURLRef)[NSURL fileURLWithPath:self.outputFilePath], kAudioFileM4AType, &destinationFormat, NULL, kAudioFileFlags_EraseFile, &destinationFile), "ExtAudioFileCreateWithURL")) 
 	{
 		self.error = [NSError errorWithDomain:AACAudioConverterErrorDomain
 										 code:AACAudioConverterFileError
 									 userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Couldn't open the source file", @"") forKey:NSLocalizedDescriptionKey]];
-        return NO;
-    }
-    
-    AudioStreamBasicDescription clientFormat;
-    if (sourceFormat.mFormatID == kAudioFormatLinearPCM) 
+		return NO;
+	}
+	
+	AudioStreamBasicDescription clientFormat;
+	if (sourceFormat.mFormatID == kAudioFormatLinearPCM) 
 	{
-        clientFormat = sourceFormat;
-    }
+		clientFormat = sourceFormat;
+	}
 	else
 	{
-        memset(&clientFormat, 0, sizeof(clientFormat));
-        int sampleSize = sizeof(AudioSampleType);
-        clientFormat.mFormatID = kAudioFormatLinearPCM;
-        clientFormat.mFormatFlags = kAudioFormatFlagsCanonical;
-        clientFormat.mBitsPerChannel = 8 * sampleSize;
-        clientFormat.mChannelsPerFrame = sourceFormat.mChannelsPerFrame;
-        clientFormat.mFramesPerPacket = 1;
-        clientFormat.mBytesPerPacket = clientFormat.mBytesPerFrame = sourceFormat.mChannelsPerFrame * sampleSize;
-        clientFormat.mSampleRate = sourceFormat.mSampleRate;
-    }
+		memset(&clientFormat, 0, sizeof(clientFormat));
+		int sampleSize = sizeof(AudioSampleType);
+		clientFormat.mFormatID = kAudioFormatLinearPCM;
+		clientFormat.mFormatFlags = kAudioFormatFlagsCanonical;
+		clientFormat.mBitsPerChannel = 8 * sampleSize;
+		clientFormat.mChannelsPerFrame = sourceFormat.mChannelsPerFrame;
+		clientFormat.mFramesPerPacket = 1;
+		clientFormat.mBytesPerPacket = clientFormat.mBytesPerFrame = sourceFormat.mChannelsPerFrame * sampleSize;
+		clientFormat.mSampleRate = sourceFormat.mSampleRate;
+	}
 	
 	void (^cleanupBlock)(NSInteger errorCode, NSString *errorDescription) = 
 	^ (NSInteger errorCode, NSString *errorDescription) {
@@ -175,9 +177,9 @@ static BOOL _available_set = NO;
 										 userInfo:[NSDictionary dictionaryWithObject:errorDescription forKey:NSLocalizedDescriptionKey]];
 		}
 	};
-    
-    size = sizeof(clientFormat);
-    if ((sourceFile && !checkResult(ExtAudioFileSetProperty(sourceFile, kExtAudioFileProperty_ClientDataFormat, size, &clientFormat), 
+	
+	size = sizeof(clientFormat);
+	if ((sourceFile && !checkResult(ExtAudioFileSetProperty(sourceFile, kExtAudioFileProperty_ClientDataFormat, size, &clientFormat), 
 									"ExtAudioFileSetProperty(sourceFile, kExtAudioFileProperty_ClientDataFormat")) ||
 		!checkResult(ExtAudioFileSetProperty(destinationFile, kExtAudioFileProperty_ClientDataFormat, size, &clientFormat), 
 					 "ExtAudioFileSetProperty(destinationFile, kExtAudioFileProperty_ClientDataFormat")) 
@@ -210,28 +212,28 @@ static BOOL _available_set = NO;
 		cleanupBlock(AACAudioConverterConverterError, NSLocalizedString(@"Couldn't reset destination files audio converter configuration", @""));
 		return NO;
 	}
-    
-    SInt64 lengthInFrames = 0;
-    if (sourceFile)
+	
+	SInt64 lengthInFrames = 0;
+	if (sourceFile)
 	{
-        size = sizeof(lengthInFrames);
-        ExtAudioFileGetProperty(sourceFile, kExtAudioFileProperty_FileLengthFrames, &size, &lengthInFrames);
-    }
-    
-    UInt32 bufferByteSize = 32768;
-    char srcBuffer[bufferByteSize];
-    SInt64 sourceFrameOffset = 0;
-    
+		size = sizeof(lengthInFrames);
+		ExtAudioFileGetProperty(sourceFile, kExtAudioFileProperty_FileLengthFrames, &size, &lengthInFrames);
+	}
+	
+	UInt32 bufferByteSize = 32768;
+	char srcBuffer[bufferByteSize];
+	SInt64 sourceFrameOffset = 0;
+	
 	while (![self isCancelled])
 	{
-        AudioBufferList fillBufList;
-        fillBufList.mNumberBuffers = 1;
-        fillBufList.mBuffers[0].mNumberChannels = clientFormat.mChannelsPerFrame;
-        fillBufList.mBuffers[0].mDataByteSize = bufferByteSize;
-        fillBufList.mBuffers[0].mData = srcBuffer;
-        
-        UInt32 numFrames = bufferByteSize / clientFormat.mBytesPerFrame;
-        
+		AudioBufferList fillBufList;
+		fillBufList.mNumberBuffers = 1;
+		fillBufList.mBuffers[0].mNumberChannels = clientFormat.mChannelsPerFrame;
+		fillBufList.mBuffers[0].mDataByteSize = bufferByteSize;
+		fillBufList.mBuffers[0].mData = srcBuffer;
+		
+		UInt32 numFrames = bufferByteSize / clientFormat.mBytesPerFrame;
+		
 		if ([self isCancelled])
 		{
 			if (sourceFile)
@@ -242,31 +244,31 @@ static BOOL _available_set = NO;
 			return NO;
 		}
 		
-        if (sourceFile)
+		if (sourceFile)
 		{
-            if (!checkResult(ExtAudioFileRead(sourceFile, &numFrames, &fillBufList), "ExtAudioFileRead"))
+			if (!checkResult(ExtAudioFileRead(sourceFile, &numFrames, &fillBufList), "ExtAudioFileRead"))
 			{
-                ExtAudioFileDispose(sourceFile);
-                ExtAudioFileDispose(destinationFile);
-                self.error = [NSError errorWithDomain:AACAudioConverterErrorDomain
+				ExtAudioFileDispose(sourceFile);
+				ExtAudioFileDispose(destinationFile);
+				self.error = [NSError errorWithDomain:AACAudioConverterErrorDomain
 												 code:AACAudioConverterFormatError
 											 userInfo:[NSDictionary dictionaryWithObject:NSLocalizedString(@"Error reading the source file", @"") forKey:NSLocalizedDescriptionKey]];
-                return NO;
-            }
-        }
+				return NO;
+			}
+		}
 		else
 		{
-            UInt32 length = bufferByteSize;
-            numFrames = length / clientFormat.mBytesPerFrame;
-            fillBufList.mBuffers[0].mDataByteSize = length;
-        }
-        
-        if (!numFrames)
+			UInt32 length = bufferByteSize;
+			numFrames = length / clientFormat.mBytesPerFrame;
+			fillBufList.mBuffers[0].mDataByteSize = length;
+		}
+		
+		if (!numFrames)
 		{
-            break;
-        }
-        
-        sourceFrameOffset += numFrames;
+			break;
+		}
+		
+		sourceFrameOffset += numFrames;
 		
 		if ([self isCancelled])
 		{
@@ -277,14 +279,14 @@ static BOOL _available_set = NO;
 			ExtAudioFileDispose(destinationFile);
 			return NO;
 		}
-        
+		
 		if (!checkResult(ExtAudioFileWrite(destinationFile, numFrames, &fillBufList), 
 						 "ExtAudioFileWrite(destinationFile, numFrames, &fillBufList)"))
 		{
 			cleanupBlock(AACAudioConverterFileError, NSLocalizedString(@"Error writing the destination file", @""));
 			return NO;
-        }
-    }
+		}
+	}
 	
 	cleanupBlock(-1, nil);
 	return YES;
